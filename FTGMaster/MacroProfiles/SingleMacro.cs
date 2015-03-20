@@ -9,9 +9,9 @@ namespace FTGMaster.MacroProfiles
     class SingleMacro
     {
         private String _nameString;
-        private SingleMacroAction _triggerAction;
-        private SingleMacroPreferOption _triggerPreferOption;//当某按键在另一个按键后面按下才会触发this SingleMacro
-        private SingleMacroTriggerAfter _triggerAfterOptions;
+        private SingleMacroAction _triggerAction;//触发macro所需要的键盘事件
+        private SingleMacroPreferOption _triggerPreferOption;//当某按键在另一个按键后面按下才会触发this SingleMacro的选项
+        private SingleMacroTriggerAfter _triggerAfterOptions;//延时触发选项，用于自动目押功能
         private bool _shouldBlock;
         private List<SingleMacroAction> _actions;
 
@@ -228,6 +228,64 @@ namespace FTGMaster.MacroProfiles
         {
             SingleMacroAction[] actions = _actions.ToArray();
             return actions;
+        }
+
+        //封装的用于判断macro是否应该被执行的static方法
+        public static bool ShouldTriggerAction(
+            String currentKeyString,//当前事件的key的string
+            SingleMacroActionType currentKeyActionType,//当前是按键按下还是抬起事件
+            double currentTime,//当前时间
+            SingleMacro actionToCheck,//需要检查是否执行的action
+            Dictionary<String, double> pressedKeyTimeDictionary,//之前记录的按下按键的时间
+            Dictionary<String, double> liftedKeyTimeDictionary,//之前记录的弹起按键的时间
+            out SingleMacroTriggerAfterOption selectedTriggerAfterOption//生效的after选项（自动目押）
+            )
+        {
+            if (actionToCheck.TriggerAction().Key() != currentKeyString)
+            {
+                selectedTriggerAfterOption = null;
+                return false;
+            }
+
+            if (actionToCheck.TriggerAction().Type() != currentKeyActionType)
+            {
+                selectedTriggerAfterOption = null;
+                return false;
+            }
+
+            //如果有prefer设置，检查是否满足prefer设置
+            if (actionToCheck.TriggerPreferOption() != null)
+            {
+                String beforeKeyString = actionToCheck.TriggerPreferOption().BeforeKey();
+                String afterKeyString = actionToCheck.TriggerPreferOption().LateKey();
+                double beforeKeyTime = 0;
+                double afterKeyTime = 0;
+                if (pressedKeyTimeDictionary.ContainsKey(beforeKeyString))
+                {
+                    beforeKeyTime = pressedKeyTimeDictionary[beforeKeyString];
+                }
+                if (pressedKeyTimeDictionary.ContainsKey(afterKeyString))
+                {
+                    afterKeyTime = pressedKeyTimeDictionary[afterKeyString];
+                }
+                if (afterKeyTime <= beforeKeyTime)//包括afterKey没按下，或afterKey在beforeKey之前按下的情况
+                {
+                    selectedTriggerAfterOption = null;
+                    return false;//设置了prefer选项，此次事件不满足preferOption， 不执行
+                }
+            }
+
+            //检查after设置（自动目押）
+            SingleMacroTriggerAfterOption nearestOption = null;
+            SingleMacroTriggerAfterOption[] options = actionToCheck.TriggerAfterOptions();
+            foreach (SingleMacroTriggerAfterOption option in options)
+            {
+                String optionKey = option.Key();
+                //TODO:选出nearestOption
+            }
+
+            selectedTriggerAfterOption = null;
+            return true;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace FTGMaster.MacroProfiles
             _delayMilliseconds = delayMilliSeconds;
         }
 
-        public SingleMacroActionType type()
+        public SingleMacroActionType Type()
         {
             return _type;
         }
