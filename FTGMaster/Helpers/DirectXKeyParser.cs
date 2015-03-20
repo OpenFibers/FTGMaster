@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DirectXHelper
+namespace DirectXKeyParser
 {
     public class DirectXKeyParser
     {
