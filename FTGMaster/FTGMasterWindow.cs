@@ -82,7 +82,7 @@ namespace FTGMaster
             double currentTime = _timeHelper.GetCurrentMilliseconds();
 
             //记录按键下压和抬起的时间到dictionary中，用于后面的条件判断
-            String keyString = kea.Key.ToString();
+            String keyString = kea.Key.ToString().ToLower();
             DirectXKeyCode code = DirectXKeyParser.DirectXKeyScanCodeFromString(keyString);
             if (code != DirectXKeyCode.None)
             {
@@ -96,9 +96,21 @@ namespace FTGMaster
                 }
             }
 
-            foreach (SingleMacroAction action in _currentProfile.AllMacros)
+            //检查是否有合适执行的macro
+            foreach (SingleMacro action in _currentProfile.AllMacros())
             {
-
+                bool shouldExcute = SingleMacro.ShouldTriggerAction(
+                    keyString,
+                    type,
+                    currentTime,
+                    action,
+                    _keyPressedTimeDictionary,
+                    _keyLiftedTimeDictionary);
+                if (shouldExcute)//找到合适执行的macro就执行，停止查找
+                {
+                    //excute macro
+                    break;
+                }
             }
 
             string msg = string.Format("\nKeyDown event: {0}.", currentTime.ToString());
