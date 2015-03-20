@@ -24,6 +24,7 @@ namespace FTGMaster
         private HighPrecisionTimeHelper _timeHelper = null;
         private MacroProfile _currentProfile = null;
         private Dictionary<String, double> _keyPressedTimeDictionary = null;
+        private Dictionary<String, double> _keyLiftedTimeDictionary = null;
 
         public FTGMasterWindow()//构造函数
         {
@@ -51,6 +52,7 @@ namespace FTGMaster
 
             //初始化
             _keyPressedTimeDictionary = new Dictionary<String, double>();
+            _keyLiftedTimeDictionary = new Dictionary<String, double>();
         }
 
         ~FTGMasterWindow()
@@ -79,17 +81,25 @@ namespace FTGMaster
             //读取当前按下时间
             double currentTime = _timeHelper.GetCurrentMilliseconds();
 
-            //如果是下压事件，记录到dictionary中，用于后面的条件判断
-            if (type == SingleMacroActionType.Press)
+            //记录按键下压和抬起的时间到dictionary中，用于后面的条件判断
+            String keyString = kea.Key.ToString();
+            DirectXKeyCode code = DirectXKeyParser.DirectXKeyScanCodeFromString(keyString);
+            if (code != DirectXKeyCode.None)
             {
-                String keyString = kea.Key.ToString();
-                DirectXKeyCode code = DirectXKeyParser.DirectXKeyScanCodeFromString(keyString);
-                if (code != DirectXKeyCode.None)
+                if (type == SingleMacroActionType.Press)
                 {
                     _keyPressedTimeDictionary[keyString] = currentTime;
                 }
+                else if (type == SingleMacroActionType.Lift)
+                {
+                    _keyLiftedTimeDictionary[keyString] = currentTime;
+                }
             }
 
+            foreach (SingleMacroAction action in _currentProfile.AllMacros)
+            {
+
+            }
 
             string msg = string.Format("\nKeyDown event: {0}.", currentTime.ToString());
 
