@@ -1,0 +1,5 @@
+*.suo
+FTGMaster/obj/
+FTGMaster/obj/*
+FTGMaster/bin/
+FTGMaster/bin/*
