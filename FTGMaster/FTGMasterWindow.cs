@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Kennedy.ManagedHooks;
 using FTGMaster.MacroProfiles;
-using DirectXKeyParserNameSpace;
+using FTGMaster.Helpers;
 
 //TODO：补齐脚本注释
 //TODO：按键记录，用于判断后面的触发条件
@@ -95,7 +95,7 @@ namespace FTGMaster
         {
             Console.WriteLine("\\");
             int scanCode = (int)DirectXKeyParser.DirectXKeyScanCodeFromString("Escape");
-            SendInputHelper.SendInputHelper.DirectInputKeyDown(38);
+            SendInputHelper.DirectInputKeyDown(38);
         }
     }
 }

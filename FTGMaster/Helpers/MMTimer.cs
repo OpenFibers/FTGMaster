@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-namespace MMTimer
+namespace FTGMaster.Helpers
 {
     public delegate void MMTimerPressKeyDelegate(int vkCode);
     public class MMTimer : IDisposable
