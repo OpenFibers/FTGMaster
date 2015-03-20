@@ -54,7 +54,7 @@
     <Compile Include="FTGMasterWindow.Designer.cs">
       <DependentUpon>FTGMasterWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\DirectXKeyEnum.cs" />
+    <Compile Include="Helpers\DirectXKeyParser.cs" />
     <Compile Include="Helpers\MMTimer.cs" />
     <Compile Include="Helpers\SendInputHelper.cs" />
     <Compile Include="MacroProfiles\SingleMacroPreferOption.cs" />
