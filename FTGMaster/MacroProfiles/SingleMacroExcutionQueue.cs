@@ -8,6 +8,13 @@ namespace FTGMaster.MacroProfiles
 {
     class SingleMacroExcutionQueue
     {
+        //SingleMacroExecutionQueue执行完成的回调
+        public delegate void SingleMacroExecutionCompleteCallback(
+            SingleMacroExcutionQueue queue,
+            SingleMacro macro,
+            bool success
+            );
+
         public SingleMacroExcutionQueue(SingleMacro macro, int delayMilliseconds)
         {
 
