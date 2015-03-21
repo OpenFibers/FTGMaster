@@ -110,6 +110,12 @@ namespace FTGMaster
                     out delayToTriggerAfterNow);
                 if (shouldExcute)//找到合适执行的macro就执行，停止查找
                 {
+                    //判断是否应该block原有按键
+                    if(macro.ShouldBlock())
+                    {
+                        kea.Cancel = true;
+                    }
+
                     //excute macro
                     this.ExecuteSingleMacro(macro, delayToTriggerAfterNow);
                     break;
@@ -119,16 +125,7 @@ namespace FTGMaster
 
         private void ExecuteSingleMacro(SingleMacro macro, int delay)
         {
-            string msg = string.Format("\nKeyDown event: {0}.", currentTime.ToString());
-
-            //
-            // Prevent the 'A' key from reaching any applications whatsoever
-            // except this callback and other system hook applications.
-            //
-            if (kea.Key == Keys.A)
-            {
-                msg += " [BLOCKED]";
-            }
+            string msg = string.Format("KeyDown event: {0}.", macro.NameString());
             Console.WriteLine(msg);
         }
     }
