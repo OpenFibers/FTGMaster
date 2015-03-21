@@ -10,6 +10,7 @@ namespace FTGMaster.MacroProfiles
     {
         private String _nameString;
         private SingleMacroAction _triggerAction;//触发macro所需要的键盘事件
+        private SingleMacroTriggerModifier _triggerModifier;//触发macro所需要的组合按键
         private SingleMacroPreferOption _triggerPreferOption;//当某按键在另一个按键后面按下才会触发this SingleMacro的选项
         private SingleMacroTriggerAfter _triggerAfterOptions;//延时触发选项，用于自动目押功能
         private bool _shouldBlock;
@@ -18,6 +19,7 @@ namespace FTGMaster.MacroProfiles
         private SingleMacro(
             String name,
             SingleMacroAction triggerAction,
+            SingleMacroTriggerModifier triggerModifier,
             SingleMacroPreferOption macroPreferOption,
             SingleMacroTriggerAfter triggerAfterOption,
             bool shouldBlock,
@@ -26,6 +28,7 @@ namespace FTGMaster.MacroProfiles
         {
             _nameString = name;
             _triggerAction = triggerAction;
+            _triggerModifier = triggerModifier;
             _triggerPreferOption = macroPreferOption;
             _triggerAfterOptions = triggerAfterOption;
             _shouldBlock = shouldBlock;
@@ -47,6 +50,7 @@ namespace FTGMaster.MacroProfiles
             }
             String nameString = null;
             SingleMacroAction triggerAction = null;
+            SingleMacroTriggerModifier triggerModifier = null;
             SingleMacroPreferOption triggerPreferOption = null;
             SingleMacroTriggerAfter triggerAfterOption = null;
             bool shouldBlock = false;
@@ -80,6 +84,11 @@ namespace FTGMaster.MacroProfiles
                 {
                     String key = trimmedArg.Substring("press".Length).Trim();
                     triggerAction = new SingleMacroAction(SingleMacroActionType.Press, key);
+                }
+                else if (trimmedArg.IndexOf("modifier") == 0)//以press开始(press覆盖lift)
+                {
+                    String trimmedOption = trimmedArg.Substring("modifier".Length).Trim();
+                    triggerModifier = SingleMacroTriggerModifier.SingleMacroTriggerModifierFromOptionString(trimmedOption);
                 }
                 else if (trimmedArg.IndexOf("prefer") == 0)//以prefer开始
                 {
@@ -154,6 +163,7 @@ namespace FTGMaster.MacroProfiles
             SingleMacro macro = new SingleMacro(
                 nameString,
                 triggerAction, 
+                triggerModifier,
                 triggerPreferOption,
                 triggerAfterOption, 
                 shouldBlock, 
