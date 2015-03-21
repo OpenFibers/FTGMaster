@@ -33,7 +33,7 @@ end				//end表示macro定义结束
 //2.以下是自定义触发条件举例
 //FTGMaster支持多种多样的触发条件，这对于格斗类游戏Macro定义尤为有效，可以完成各种神级操作
 :Trigger_Condition_Demo(  		//首先以:开始定义一个Macro，后面紧接的Trigger_Condition_Demo是本Macro的Name
-	press g,			//首先定义触发Macro的按键动作。支持press（按下）和lift（弹起）。
+	press h,			//首先定义触发Macro的按键动作。支持press（按下）和lift（弹起）。
 					//动作后面一个空格，后面写按键对应的字符串
 	modifier control&alt,		//定义modifier。当control和alt均为按下状态时按g此Macro才会被触发。
 	prefer a>d,			//定义prefer选项。a>d表示只有之前a键晚于d键被按下，此Macro才会被触发。时间以按键按下时间为准。

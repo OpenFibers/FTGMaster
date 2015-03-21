@@ -20,6 +20,16 @@ namespace FTGMaster.MacroProfiles
             _modifierKeyStrings.Add(keyString);
         }
 
+        public String[] TriggerModifierKeyStrings()
+        {
+            if (_modifierKeyStrings == null)
+            {
+                return null;
+            }
+            String[] keyStrings = _modifierKeyStrings.ToArray();
+            return keyStrings;
+        }
+
         public static SingleMacroTriggerModifier SingleMacroTriggerModifierFromOptionString(String optionString)
         {
             if (optionString == null)

@@ -213,6 +213,16 @@ namespace FTGMaster.MacroProfiles
             return _triggerAction;
         }
 
+        public String[] TriggerModifierKeyStrings()
+        {
+            if (_triggerModifier == null)
+            {
+                return null;
+            }
+            String[] keyStrings = _triggerModifier.TriggerModifierKeyStrings();
+            return keyStrings;
+        }
+
         public SingleMacroPreferOption TriggerPreferOption()
         {
             return _triggerPreferOption;
@@ -268,6 +278,15 @@ namespace FTGMaster.MacroProfiles
                 selectedTriggerAfterOption = null;
                 delayToTriggerAfterNow = 0;
                 return false;
+            }
+
+            String[] modifierKeyStrings = actionToCheck.TriggerModifierKeyStrings();
+            if (modifierKeyStrings != null && modifierKeyStrings.Length != 0)
+            {
+                foreach (String modifierKeyString in modifierKeyStrings)
+                {
+                    //todo:是否合法的检查
+                }
             }
 
             //如果有prefer设置，检查是否满足prefer设置
