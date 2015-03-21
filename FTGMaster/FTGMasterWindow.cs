@@ -49,7 +49,7 @@ namespace FTGMaster
             }
 
             //读取当前的profile文件
-            _currentProfile = MacroProfile.ProfileFromFileRelativePath("default.txt");
+            _currentProfile = MacroProfile.ProfileFromFileRelativePath("demo_script.txt");
 
             //初始化
             _keyPressedTimeDictionary = new Dictionary<String, double>();
