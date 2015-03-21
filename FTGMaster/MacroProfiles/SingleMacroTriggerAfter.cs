@@ -27,6 +27,10 @@ namespace FTGMaster.MacroProfiles
 
         public SingleMacroTriggerAfterOption[] TriggerAfterOptions()
         {
+            if (_options == null)
+            {
+                return null;
+            }
             SingleMacroTriggerAfterOption[] options = _options.ToArray();
             return options;
         }
