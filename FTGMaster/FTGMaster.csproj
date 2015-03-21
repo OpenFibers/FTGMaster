@@ -58,7 +58,7 @@
     <Compile Include="Helpers\DirectXKeyParser.cs" />
     <Compile Include="Helpers\MMTimer.cs" />
     <Compile Include="Helpers\SendInputHelper.cs" />
-    <Compile Include="MacroProfiles\SingleMacroExcutionQueue.cs" />
+    <Compile Include="MacroProfiles\SingleMacroExecutionQueue.cs" />
     <Compile Include="MacroProfiles\SingleMacroPreferOption.cs" />
     <Compile Include="MacroProfiles\SingleMacroTriggerAfter.cs" />
     <Compile Include="MacroProfiles\SingleMacroAction.cs" />

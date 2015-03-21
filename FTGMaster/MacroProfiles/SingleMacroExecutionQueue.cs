@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace FTGMaster.MacroProfiles
 {
-    class SingleMacroExcutionQueue
+    class SingleMacroExecutionQueue
     {
         //SingleMacroExecutionQueue执行完成的回调
         public delegate void SingleMacroExecutionCompleteCallback(
-            SingleMacroExcutionQueue queue,
+            SingleMacroExecutionQueue queue,
             SingleMacro macro,
             bool success
             );
 
-        public SingleMacroExcutionQueue(SingleMacro macro, int delayMilliseconds)
+        public SingleMacroExecutionQueue(SingleMacro macro, int delayMilliseconds)
         {
 
         }
