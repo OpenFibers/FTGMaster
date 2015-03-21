@@ -4,7 +4,7 @@
 
 //和大多数语言一样，两个slash后面至换行符前面是注释部分。FTGMaster并不支持其他的注释方式。
 
-//定义Macro的运算符有: ( ) , | ; > end 共8个。和大部分语言一样，运算符只支持半角英文字符。请不要把全角标点当做运算符。
+//定义Macro的运算符有: ( ) , | & ; > end 共9个。和大部分语言一样，运算符只支持半角英文字符。请不要把全角标点当做运算符。
 
 //除了MacroName外，所有代码均大小写不敏感。声明按下按键可以随你喜欢写Press、press或PRESS。
 
@@ -35,6 +35,7 @@ end				//end表示macro定义结束
 :Trigger_Condition_Demo(  		//首先以:开始定义一个Macro，后面紧接的Trigger_Condition_Demo是本Macro的Name
 	press g,			//首先定义触发Macro的按键动作。支持press（按下）和lift（弹起）。
 					//动作后面一个空格，后面写按键对应的字符串
+	modifier control&alt,		//定义modifier。当control和alt均为按下状态时按g此Macro才会被触发。
 	prefer a>d,			//定义prefer选项。a>d表示只有之前a键晚于d键被按下，此Macro才会被触发。时间以按键按下时间为准。
 					//prefer选项主要用于格斗类游戏为Macro选择方向时使用
 	after j 2000|k 2000|l 2000,	//定义after选项，以j、k、l三个键中在时间范围内的最晚按下的为准
