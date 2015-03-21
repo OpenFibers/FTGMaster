@@ -76,8 +76,6 @@ namespace FTGMaster
 
         private void KeyEventCallback(object sender, KeyboardHookEventArgs kea, SingleMacroActionType type)//按键回调
         {
-            kea.Cancel = true;
-
             //读取当前按下时间
             double currentTime = _timeHelper.GetCurrentMilliseconds();
 
@@ -97,22 +95,30 @@ namespace FTGMaster
             }
 
             //检查是否有合适执行的macro
-            foreach (SingleMacro action in _currentProfile.AllMacros())
+            foreach (SingleMacro macro in _currentProfile.AllMacros())
             {
+                SingleMacroTriggerAfterOption selectedTriggerAfterOption;//生效的after选项（自动目押）
+                int delayToTriggerAfterNow;//从当前时间延后多少毫秒触发。由selectedTriggerAfterOption和当前时间计算而来
                 bool shouldExcute = SingleMacro.ShouldTriggerAction(
                     keyString,
                     type,
                     currentTime,
-                    action,
+                    macro,
                     _keyPressedTimeDictionary,
-                    _keyLiftedTimeDictionary);
+                    _keyLiftedTimeDictionary,
+                    out selectedTriggerAfterOption,
+                    out delayToTriggerAfterNow);
                 if (shouldExcute)//找到合适执行的macro就执行，停止查找
                 {
                     //excute macro
+                    this.ExecuteSingleMacro(macro, delayToTriggerAfterNow);
                     break;
                 }
             }
+        }
 
+        private void ExecuteSingleMacro(SingleMacro macro, int delay)
+        {
             string msg = string.Format("\nKeyDown event: {0}.", currentTime.ToString());
 
             //
@@ -122,17 +128,8 @@ namespace FTGMaster
             if (kea.Key == Keys.A)
             {
                 msg += " [BLOCKED]";
-
-                this.aaa();
             }
-            Console.Write(msg);
-        }
-
-        private void aaa()
-        {
-            Console.WriteLine("\\");
-            int scanCode = (int)DirectXKeyParser.DirectXKeyScanCodeFromString("Escape");
-            SendInputHelper.DirectInputKeyDown(38);
+            Console.WriteLine(msg);
         }
     }
 }

@@ -238,18 +238,21 @@ namespace FTGMaster.MacroProfiles
             SingleMacro actionToCheck,//需要检查是否执行的action
             Dictionary<String, double> pressedKeyTimeDictionary,//之前记录的按下按键的时间
             Dictionary<String, double> liftedKeyTimeDictionary,//之前记录的弹起按键的时间
-            out SingleMacroTriggerAfterOption selectedTriggerAfterOption//生效的after选项（自动目押）
+            out SingleMacroTriggerAfterOption selectedTriggerAfterOption,//生效的after选项（自动目押）
+            out int delayToTriggerAfterNow//从当前时间延后多少毫秒触发。由selectedTriggerAfterOption和当前时间计算而来
             )
         {
             if (actionToCheck.TriggerAction().Key() != currentKeyString)
             {
                 selectedTriggerAfterOption = null;
+                delayToTriggerAfterNow = 0;
                 return false;
             }
 
             if (actionToCheck.TriggerAction().Type() != currentKeyActionType)
             {
                 selectedTriggerAfterOption = null;
+                delayToTriggerAfterNow = 0;
                 return false;
             }
 
@@ -271,20 +274,44 @@ namespace FTGMaster.MacroProfiles
                 if (afterKeyTime <= beforeKeyTime)//包括afterKey没按下，或afterKey在beforeKey之前按下的情况
                 {
                     selectedTriggerAfterOption = null;
+                    delayToTriggerAfterNow = 0;
                     return false;//设置了prefer选项，此次事件不满足preferOption， 不执行
                 }
             }
 
             //检查after设置（自动目押）
             SingleMacroTriggerAfterOption nearestOption = null;
+            double lastNearestOptionPressTime = 0;
+            int optionDelayAfterNow = 0;
             SingleMacroTriggerAfterOption[] options = actionToCheck.TriggerAfterOptions();
-            foreach (SingleMacroTriggerAfterOption option in options)
+            foreach (SingleMacroTriggerAfterOption option in options)//选出最后按下的合法after option
             {
                 String optionKey = option.Key();
-                //TODO:选出nearestOption
+                int delay = option.DelayMilliseconds();
+                if (pressedKeyTimeDictionary.ContainsKey(optionKey))
+                {
+                    double optionKeyPressedTime = pressedKeyTimeDictionary[optionKey];
+                    if (optionKeyPressedTime + delay > currentTime)//合法的after option。也就是上次此按键按下+delay大于当前时间
+                    {
+                        if (optionKeyPressedTime > lastNearestOptionPressTime)//选出最后按下在after option中的按键
+                        {
+                            lastNearestOptionPressTime = optionKeyPressedTime;
+                            optionDelayAfterNow = (int)System.Math.Round(optionKeyPressedTime + (double)delay - currentTime);
+                            nearestOption = option;
+                        }
+                    }
+                }
+            }
+
+            if (nearestOption != null)
+            {
+                selectedTriggerAfterOption = nearestOption;
+                delayToTriggerAfterNow = optionDelayAfterNow;
+                return true;
             }
 
             selectedTriggerAfterOption = null;
+            delayToTriggerAfterNow = 0;
             return true;
         }
     }
