@@ -25,6 +25,7 @@ namespace FTGMaster
         private MacroProfile _currentProfile = null;
         private Dictionary<String, double> _keyPressedTimeDictionary = null;
         private Dictionary<String, double> _keyLiftedTimeDictionary = null;
+        private List<SingleMacroExecutionQueue> _macroExecutionQueues = null;
 
         public FTGMasterWindow()//构造函数
         {
@@ -53,6 +54,7 @@ namespace FTGMaster
             //初始化
             _keyPressedTimeDictionary = new Dictionary<String, double>();
             _keyLiftedTimeDictionary = new Dictionary<String, double>();
+            _macroExecutionQueues = new List<SingleMacroExecutionQueue>();
         }
 
         ~FTGMasterWindow()
@@ -123,10 +125,24 @@ namespace FTGMaster
             }
         }
 
-        private void ExecuteSingleMacro(SingleMacro macro, int delay)
+        private void ExecuteSingleMacro(SingleMacro macro, int delayMilliseconds)
         {
-            string msg = string.Format("KeyDown event: {0}.", macro.NameString());
-            Console.WriteLine(msg);
+            SingleMacroExecutionQueue queue = new SingleMacroExecutionQueue(macro, delayMilliseconds);
+            _macroExecutionQueues.Add(queue);
+            queue.Start(this.MacroCompleteCallback);
+        }
+
+        private void MacroCompleteCallback(
+            SingleMacroExecutionQueue queue,
+            SingleMacro macro,
+            bool success
+            )
+        {
+            bool contains = _macroExecutionQueues.Contains(queue);
+            if (contains)
+            {
+                _macroExecutionQueues.Remove(queue);
+            }
         }
     }
 }

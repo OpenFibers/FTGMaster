@@ -15,19 +15,45 @@ namespace FTGMaster.MacroProfiles
             bool success
             );
 
+        private SingleMacro _macro;
+        private int _delayMilliseconds;
+        private int _currentActionIndex;
+        private SingleMacroExecutionCompleteCallback _callback;
+        private bool _started;
+
         public SingleMacroExecutionQueue(SingleMacro macro, int delayMilliseconds)
         {
-
+            _macro = macro;
+            _delayMilliseconds = delayMilliseconds;
+            _currentActionIndex = 0;
+            _started = false;
         }
 
-        public void Start()
+        ~SingleMacroExecutionQueue()
         {
+            this.Stop();
+        }
 
+        public void Start(SingleMacroExecutionCompleteCallback callback)
+        {
+            if (_started)
+            {
+                return;
+            }
+            _started = true;
+            _callback = callback;
+
+            this.CompletionCallback();
         }
 
         public void Stop()
         {
 
+        }
+
+        private void CompletionCallback()
+        {
+            _callback(this, _macro, true);
         }
     }
 }
