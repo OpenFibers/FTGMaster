@@ -127,6 +127,9 @@ namespace FTGMaster
 
         private void ExecuteSingleMacro(SingleMacro macro, int delayMilliseconds)
         {
+            string consoleMessage = string.Format("Macro begin execute macro named: {0}.", macro.NameString());
+            Console.WriteLine(consoleMessage);
+
             SingleMacroExecutionQueue queue = new SingleMacroExecutionQueue(macro, delayMilliseconds);
             _macroExecutionQueues.Add(queue);
             queue.Start(this.MacroCompleteCallback);

@@ -35,7 +35,7 @@ end				//end表示macro定义结束
 :Trigger_Condition_Demo(  		//首先以:开始定义一个Macro，后面紧接的Trigger_Condition_Demo是本Macro的Name
 	press h,			//首先定义触发Macro的按键动作。支持press（按下）和lift（弹起）。
 					//动作后面一个空格，后面写按键对应的字符串
-	modifier control&alt,		//定义modifier。当control和alt均为按下状态时按g此Macro才会被触发。
+	modifier z&x,		//定义modifier。当control和alt均为按下状态时按g此Macro才会被触发。
 	prefer a>d,			//定义prefer选项。a>d表示只有之前a键晚于d键被按下，此Macro才会被触发。时间以按键按下时间为准。
 					//prefer选项主要用于格斗类游戏为Macro选择方向时使用
 	after j 2000|k 2000|l 2000,	//定义after选项，以j、k、l三个键中在时间范围内的最晚按下的为准

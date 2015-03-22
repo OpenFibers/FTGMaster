@@ -283,9 +283,30 @@ namespace FTGMaster.MacroProfiles
             String[] modifierKeyStrings = actionToCheck.TriggerModifierKeyStrings();
             if (modifierKeyStrings != null && modifierKeyStrings.Length != 0)
             {
+                bool allModifierPressed = true;
                 foreach (String modifierKeyString in modifierKeyStrings)
                 {
-                    //todo:是否合法的检查
+                    double modifierPressTime = 0;
+                    double modifierLiftTime = 0;
+                    if (pressedKeyTimeDictionary.ContainsKey(modifierKeyString))
+                    {
+                        modifierPressTime = pressedKeyTimeDictionary[modifierKeyString];
+                    }
+                    if (liftedKeyTimeDictionary.ContainsKey(modifierKeyString))
+                    {
+                        modifierLiftTime = liftedKeyTimeDictionary[modifierKeyString];
+                    }
+                    if (modifierPressTime < modifierLiftTime)
+                    {
+                        allModifierPressed = false;
+                        break;
+                    }
+                }
+                if (!allModifierPressed)
+                {
+                    selectedTriggerAfterOption = null;
+                    delayToTriggerAfterNow = 0;
+                    return false;
                 }
             }
 
