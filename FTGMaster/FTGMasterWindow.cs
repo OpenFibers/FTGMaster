@@ -86,7 +86,19 @@ namespace FTGMaster
             DirectXKeyCode code = DirectXKeyParser.DirectXKeyScanCodeFromString(keyString);
             if (code != DirectXKeyCode.None)
             {
-                this.StoreKeyEventTime(keyString, type, currentTime);
+                
+                String[] keyAliases = DirectXKeyParser.AliasesForKeyString(keyString);
+                if (keyAliases != null && keyAliases.Length != 0)
+                {
+                    foreach(String eachAlias in keyAliases)
+                    {
+                        this.StoreKeyEventTime(eachAlias, type, currentTime);
+                    }
+                }
+                else
+                {
+                    this.StoreKeyEventTime(keyString, type, currentTime);
+                }
             }
 
             //检查是否有合适执行的macro
