@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 using Kennedy.ManagedHooks;
 using FTGMaster.MacroProfiles;
 using FTGMaster.Helpers;
 
 //TODO：补齐脚本注释
-//TODO：按键记录，用于判断后面的触发条件
-//TODO：按键检测
+//TODO: 队列改为Disposable
 //TODO：执行队列
 
 namespace FTGMaster
@@ -147,7 +147,7 @@ namespace FTGMaster
         private void ExecuteSingleMacro(SingleMacro macro, int delayMilliseconds)
         {
             string consoleMessage = string.Format("Macro begin execute macro named: {0}.", macro.NameString());
-            Console.WriteLine(consoleMessage);
+            Debug.WriteLine(consoleMessage);
 
             SingleMacroExecutionQueue queue = new SingleMacroExecutionQueue(macro, delayMilliseconds);
             _macroExecutionQueues.Add(queue);
