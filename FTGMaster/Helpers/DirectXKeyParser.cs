@@ -108,6 +108,8 @@ namespace FTGMaster.Helpers
                 case "lctrl":
                 case "controlkey":
                 case "lcontrolkey":
+                case "control":
+                case "ctrl":
                     value = DirectXKeyCode.LeftControl;
                     break;
                 case "a":
@@ -153,6 +155,7 @@ namespace FTGMaster.Helpers
                 case "lshift":
                 case "shiftkey":
                 case "lshiftkey":
+                case "shift":
                     value = DirectXKeyCode.LeftShift;
                     break;
                 case "\\":
@@ -207,6 +210,8 @@ namespace FTGMaster.Helpers
                 case "leftalt":
                 case "lalt":
                 case "altkey":
+                case "menu":
+                case "alt":
                     value = DirectXKeyCode.LeftAlt;
                     break;
                 case "space":
@@ -464,6 +469,7 @@ namespace FTGMaster.Helpers
                     break;
                 case "leftwindows":
                 case "lwindows":
+                case "windows":
                     value = DirectXKeyCode.LeftWindows;
                     break;
                 case "rightwindows":
@@ -530,18 +536,18 @@ namespace FTGMaster.Helpers
         private static String[] leftBracketArray = { "{", "[" };
         private static String[] rightBracketArray = { "}", "]" };
         private static String[] returnArray = { "return", "enter" };
-        private static String[] leftControlArray = { "leftcontrol", "lcontrol", "lctrl", "controlkey", "lcontrolkey" };
+        private static String[] leftControlArray = { "leftcontrol", "lcontrol", "lctrl", "controlkey", "lcontrolkey", "control", "ctrl" };
         private static String[] semicolonArray = { ";", "semicolon" };
         private static String[] apostropheArray = { "'", "apostrophe" };
         private static String[] graveArray = { "`", "grave" };
-        private static String[] leftShiftArray = { "leftshift", "lshift", "shiftkey", "lshiftkey" };
+        private static String[] leftShiftArray = { "leftshift", "lshift", "shiftkey", "lshiftkey", "shift" };
         private static String[] backSlashArray = { "\\", "backslash" };
         private static String[] commaArray = { ",", "comma" };
         private static String[] periodArray = { ".", "period" };
         private static String[] slashArray = { "/", "slash" };
         private static String[] rightShiftArray = { "rightshift", "rshift", "rshiftkey" };
         private static String[] numpadStarArray = { "*", "numpadstar", "multiply" };
-        private static String[] leftAltArray = { "leftmenu", "lmenu", "leftalt", "lalt", "altkey" };
+        private static String[] leftAltArray = { "leftmenu", "lmenu", "leftalt", "lalt", "altkey", "menu", "alt" };
         private static String[] capslockArray = { "capital", "capsLock" };
         private static String[] scrollLockArray = { "scroll", "scrolllock" };
         private static String[] numpadMinusArray = { "numpad-", "numpadminus", "subtract" };
@@ -566,7 +572,7 @@ namespace FTGMaster.Helpers
         private static String[] rightArrowArray = { "right", "rightarrow" };
         private static String[] downArrowArray = { "down", "downarrow" };
         private static String[] pageDownArray = { "next", "pagedown" };
-        private static String[] leftWindowsArray = { "leftwindows", "lwindows" };
+        private static String[] leftWindowsArray = { "leftwindows", "lwindows", "windows" };
         private static String[] rightWindowsArray = { "rightwindows", "rwindows" };
         private static String[] appsArray = { "apps", "application", "app" };
         private static String[] webSearchArray = { "websearch", "browsersearch" };
@@ -603,6 +609,8 @@ namespace FTGMaster.Helpers
                 case "lctrl":
                 case "controlkey":
                 case "lcontrolkey":
+                case "control":
+                case "ctrl":
                     value = leftControlArray;
                     break;
                 case ";":
@@ -621,6 +629,7 @@ namespace FTGMaster.Helpers
                 case "lshift":
                 case "shiftkey":
                 case "lshiftkey":
+                case "shift":
                     value = leftShiftArray;
                     break;
                 case "\\":
@@ -654,6 +663,8 @@ namespace FTGMaster.Helpers
                 case "leftalt":
                 case "lalt":
                 case "altkey":
+                case "menu":
+                case "alt":
                     value = leftAltArray;
                     break;
                 case "capital":
@@ -764,6 +775,7 @@ namespace FTGMaster.Helpers
                     break;
                 case "leftwindows":
                 case "lwindows":
+                case "windows":
                     value = leftWindowsArray;
                     break;
                 case "rightwindows":
