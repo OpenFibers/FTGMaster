@@ -526,234 +526,280 @@ namespace FTGMaster.Helpers
             return value;
         }
 
-        public String[] AliasesForKeyString(String keyString)
+        private static String[] backArray = { "backspace", "back" };
+        private static String[] leftBracketArray = { "{", "[" };
+        private static String[] rightBracketArray = { "}", "]" };
+        private static String[] returnArray = { "return", "enter" };
+        private static String[] leftControlArray = { "leftcontrol", "lcontrol", "lctrl", "controlkey", "lcontrolkey" };
+        private static String[] semicolonArray = { ";", "semicolon" };
+        private static String[] apostropheArray = { "'", "apostrophe" };
+        private static String[] graveArray = { "`", "grave" };
+        private static String[] leftShiftArray = { "leftshift", "lshift", "shiftkey", "lshiftkey" };
+        private static String[] backSlashArray = { "\\", "backslash" };
+        private static String[] commaArray = { ",", "comma" };
+        private static String[] periodArray = { ".", "period" };
+        private static String[] slashArray = { "/", "slash" };
+        private static String[] rightShiftArray = { "rightshift", "rshift", "rshiftkey" };
+        private static String[] numpadStarArray = { "*", "numpadstar", "multiply" };
+        private static String[] leftAltArray = { "leftmenu", "lmenu", "leftalt", "lalt", "altkey" };
+        private static String[] capslockArray = { "capital", "capsLock" };
+        private static String[] scrollLockArray = { "scroll", "scrolllock" };
+        private static String[] numpadMinusArray = { "numpad-", "numpadminus", "subtract" };
+        private static String[] numpadPlusArray = { "numpadplus", "numpad+", "add" };
+        private static String[] numpadPeriodArray = { "numpad.", "numpadperiod", "decimal" };
+        private static String[] kanaArray = { "kana", "kanamode" };
+        private static String[] convertArray = { "convert", "imeconvert" };
+        private static String[] noConvertArray = { "noconvert", "imenoconvert" };
+        private static String[] numpadEqualsArray = { "numpadequals", "numpad=" };
+        private static String[] prevTrackArray = { "circumflex", "prevtrack", "previoustrack", "mediaprevioustrack" };
+        private static String[] atArray = { "at", "@" };
+        private static String[] underlineArray = { "underline", "_" };
+        private static String[] kanjiArray = { "kanji", "kanjimode" };
+        private static String[] nextTrackArray = { "nexttrack", "medianexttrack" };
+        private static String[] rightControlArray = { "rightcontrol", "rcontrol", "rightctrl", "rctrl", "rcontrolkey" };
+        private static String[] muteArray = { "mute", "volumemute" };
+        private static String[] numpadCommaArray = { "numpadcomma", "numpad," };
+        private static String[] rightAltArray = { "rightmenu", "rmenu", "rightalt", "ralt" };
+        private static String[] upArrowArray = { "uparrow", "up" };
+        private static String[] pageUpArray = { "prior", "pageup" };
+        private static String[] leftArrowArray = { "left", "leftarrow" };
+        private static String[] rightArrowArray = { "right", "rightarrow" };
+        private static String[] downArrowArray = { "down", "downarrow" };
+        private static String[] pageDownArray = { "next", "pagedown" };
+        private static String[] leftWindowsArray = { "leftwindows", "lwindows" };
+        private static String[] rightWindowsArray = { "rightwindows", "rwindows" };
+        private static String[] appsArray = { "apps", "application", "app" };
+        private static String[] webSearchArray = { "websearch", "browsersearch" };
+        private static String[] webFavoritesArray = { "webfavorites", "webfav", "browserfavorites", "browserfav" };
+        private static String[] webRefreshArray = { "webrefresh", "browserrefresh" };
+        private static String[] webStopArray = { "webstop", "browserstop" };
+        private static String[] webForwardArray = { "webforward", "browserforward" };
+        private static String[] webBackArray = { "webback", "browserback" };
+
+        public static String[] AliasesForKeyString(String keyString)
         {
+
             String[] value = null;
             switch (keyString)
             {
                 case "backspace":
                 case "back":
-                    value = DirectXKeyCode.BackSpace;
+                    value = backArray;
                     break;
                 case "{":
                 case "[":
-                    value = DirectXKeyCode.LeftBracket;
+                    value = leftBracketArray;
                     break;
                 case "}":
                 case "]":
-                    value = DirectXKeyCode.RightBracket;
+                    value = rightBracketArray;
                     break;
                 case "return":
                 case "enter":
-                    value = DirectXKeyCode.Return;
+                    value = returnArray;
                     break;
                 case "leftcontrol":
                 case "lcontrol":
                 case "lctrl":
                 case "controlkey":
                 case "lcontrolkey":
-                    value = DirectXKeyCode.LeftControl;
+                    value = leftControlArray;
                     break;
                 case ";":
                 case "semicolon":
-                    value = DirectXKeyCode.SemiColon;
+                    value = semicolonArray;
                     break;
                 case "'":
                 case "apostrophe":
-                    value = DirectXKeyCode.Apostrophe;
+                    value = apostropheArray;
                     break;
                 case "`":
                 case "grave":
-                    value = DirectXKeyCode.Grave;
+                    value = graveArray;
                     break;
                 case "leftshift":
                 case "lshift":
                 case "shiftkey":
                 case "lshiftkey":
-                    value = DirectXKeyCode.LeftShift;
+                    value = leftShiftArray;
                     break;
                 case "\\":
                 case "backslash"://反斜杠\
-                    value = DirectXKeyCode.BackSlash;
+                    value = backSlashArray;
                     break;
                 case ",":
                 case "comma":
-                    value = DirectXKeyCode.Comma;
+                    value = commaArray;
                     break;
                 case ".":
                 case "period":
-                    value = DirectXKeyCode.Period;
+                    value = periodArray;
                     break;
                 case "/":
                 case "slash":
-                    value = DirectXKeyCode.Slash;
+                    value = slashArray;
                     break;
                 case "rightshift":
                 case "rshift":
                 case "rshiftkey":
-                    value = DirectXKeyCode.RightShift;
+                    value = rightShiftArray;
                     break;
                 case "*":
                 case "numpadstar":
                 case "multiply":
-                    value = DirectXKeyCode.NumPadStar;
+                    value = numpadStarArray;
                     break;
                 case "leftmenu":
                 case "lmenu":
                 case "leftalt":
                 case "lalt":
                 case "altkey":
-                    value = DirectXKeyCode.LeftAlt;
+                    value = leftAltArray;
                     break;
                 case "capital":
                 case "capsLock":
-                    value = DirectXKeyCode.CapsLock;
+                    value = capslockArray;
                     break;
-
                 case "scroll":
                 case "scrolllock":
-                    value = DirectXKeyCode.Scroll;
+                    value = scrollLockArray;
                     break;
                 case "numpad-":
                 case "numpadminus":
                 case "subtract":
-                    value = DirectXKeyCode.NumPadMinus;
+                    value = numpadMinusArray;
                     break;
                 case "numpadplus":
                 case "numpad+":
                 case "add":
-                    value = DirectXKeyCode.NumPadPlus;
+                    value = numpadPlusArray;
                     break;
-
                 case "numpad.":
                 case "numpadperiod":
                 case "decimal":
-                    value = DirectXKeyCode.NumPadPeriod;
+                    value = numpadPeriodArray;
                     break;
-
                 case "kana":
                 case "kanamode":
-                    value = DirectXKeyCode.Kana;
+                    value = kanaArray;
                     break;
                 case "convert":
                 case "imeconvert"://IME convert key
-                    value = DirectXKeyCode.Convert;
+                    value = convertArray;
                     break;
                 case "noconvert":
                 case "imenoconvert": //IME no convert keyDirectXKeyCode
-                    value = DirectXKeyCode.NoConvert;
+                    value = noConvertArray;
                     break;
                 case "numpadequals":
                 case "numpad=":
-                    value = DirectXKeyCode.NumPadEquals;
+                    value = numpadEqualsArray;
                     break;
                 case "circumflex":
                 case "prevtrack":
                 case "previoustrack":
                 case "mediaprevioustrack":
-                    value = DirectXKeyCode.Circumflex;
+                    value = prevTrackArray;
                     break;
                 case "at":
                 case "@":
-                    value = DirectXKeyCode.At;
+                    value = atArray;
                     break;
                 case "underline":
                 case "_":
-                    value = DirectXKeyCode.Underline;
+                    value = underlineArray;
                     break;
                 case "kanji":
                 case "kanjimode":
-                    value = DirectXKeyCode.Kanji;
+                    value = kanjiArray;
                     break;
-
                 case "nexttrack":
                 case "medianexttrack":
-                    value = DirectXKeyCode.NextTrack;
+                    value = nextTrackArray;
                     break;
                 case "rightcontrol":
                 case "rcontrol":
                 case "rightctrl":
                 case "rctrl":
                 case "rcontrolkey":
-                    value = DirectXKeyCode.RightControl;
+                    value = rightControlArray;
                     break;
                 case "mute":
                 case "volumemute":
-                    value = DirectXKeyCode.Mute;
+                    value = muteArray;
                     break;
                 case "numpadcomma":
                 case "numpad,":
-                    value = DirectXKeyCode.NumPadComma;
+                    value = numpadCommaArray;
                     break;
                 case "rightmenu":
                 case "rmenu":
                 case "rightalt":
                 case "ralt":
-                    value = DirectXKeyCode.RightAlt;
+                    value = rightAltArray;
                     break;
-
                 case "uparrow":
                 case "up":
-                    value = DirectXKeyCode.UpArrow;
+                    value = upArrowArray;
                     break;
                 case "prior":
                 case "pageup":
-                    value = DirectXKeyCode.PageUp;
+                    value = pageUpArray;
                     break;
                 case "left":
                 case "leftarrow":
-                    value = DirectXKeyCode.LeftArrow;
+                    value = leftArrowArray;
                     break;
                 case "right":
                 case "rightarrow":
-                    value = DirectXKeyCode.RightArrow;
+                    value = rightArrowArray;
                     break;
                 case "down":
                 case "downarrow":
-                    value = new String[] { "down", "downarrow" };
+                    value = downArrowArray;
                     break;
                 case "next":
                 case "pagedown":
-                    value = new String[] { "next", "pagedown" };
+                    value = pageDownArray;
                     break;
                 case "leftwindows":
                 case "lwindows":
-                    value = new String[] { "leftwindows", "lwindows" };
+                    value = leftWindowsArray;
                     break;
                 case "rightwindows":
                 case "rwindows":
-                    value = new String[] { "rightwindows", "rwindows" };
+                    value = rightWindowsArray;
                     break;
                 case "apps":
                 case "application":
                 case "app":
-                    value = DirectXKeyCode.Apps;
+                    value = appsArray;
                     break;
                 case "websearch":
                 case "browsersearch":
-                    value = new String[] { "websearch", "browsersearch" };
+                    value = webSearchArray;
                     break;
                 case "webfavorites":
                 case "webfav":
                 case "browserfavorites":
                 case "browserfav":
-                    value = new String[] { "webfavorites", "webfav", "browserfavorites", "browserfav" };
+                    value = webFavoritesArray;
                     break;
                 case "webrefresh":
                 case "browserrefresh":
-                    value = new String[] { "webrefresh", "browserrefresh" };
+                    value = webRefreshArray;
                     break;
                 case "webstop":
                 case "browserstop":
-                    value = new String[] { "webstop", "browserstop"};
+                    value = webStopArray;
                     break;
                 case "webforward":
                 case "browserforward":
-                    value = new String[] { "webforward", "browserforward" };
+                    value = webForwardArray;
                     break;
                 case "webback":
                 case "browserback":
-                    value = new String[] { "webback", "browserback" };
+                    value = webBackArray;
                     break;
                 default:
                     break;
