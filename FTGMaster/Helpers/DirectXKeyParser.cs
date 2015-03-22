@@ -525,6 +525,241 @@ namespace FTGMaster.Helpers
             }
             return value;
         }
+
+        public String[] AliasesForKeyString(String keyString)
+        {
+            String[] value = null;
+            switch (keyString)
+            {
+                case "backspace":
+                case "back":
+                    value = DirectXKeyCode.BackSpace;
+                    break;
+                case "{":
+                case "[":
+                    value = DirectXKeyCode.LeftBracket;
+                    break;
+                case "}":
+                case "]":
+                    value = DirectXKeyCode.RightBracket;
+                    break;
+                case "return":
+                case "enter":
+                    value = DirectXKeyCode.Return;
+                    break;
+                case "leftcontrol":
+                case "lcontrol":
+                case "lctrl":
+                case "controlkey":
+                case "lcontrolkey":
+                    value = DirectXKeyCode.LeftControl;
+                    break;
+                case ";":
+                case "semicolon":
+                    value = DirectXKeyCode.SemiColon;
+                    break;
+                case "'":
+                case "apostrophe":
+                    value = DirectXKeyCode.Apostrophe;
+                    break;
+                case "`":
+                case "grave":
+                    value = DirectXKeyCode.Grave;
+                    break;
+                case "leftshift":
+                case "lshift":
+                case "shiftkey":
+                case "lshiftkey":
+                    value = DirectXKeyCode.LeftShift;
+                    break;
+                case "\\":
+                case "backslash"://反斜杠\
+                    value = DirectXKeyCode.BackSlash;
+                    break;
+                case ",":
+                case "comma":
+                    value = DirectXKeyCode.Comma;
+                    break;
+                case ".":
+                case "period":
+                    value = DirectXKeyCode.Period;
+                    break;
+                case "/":
+                case "slash":
+                    value = DirectXKeyCode.Slash;
+                    break;
+                case "rightshift":
+                case "rshift":
+                case "rshiftkey":
+                    value = DirectXKeyCode.RightShift;
+                    break;
+                case "*":
+                case "numpadstar":
+                case "multiply":
+                    value = DirectXKeyCode.NumPadStar;
+                    break;
+                case "leftmenu":
+                case "lmenu":
+                case "leftalt":
+                case "lalt":
+                case "altkey":
+                    value = DirectXKeyCode.LeftAlt;
+                    break;
+                case "capital":
+                case "capsLock":
+                    value = DirectXKeyCode.CapsLock;
+                    break;
+
+                case "scroll":
+                case "scrolllock":
+                    value = DirectXKeyCode.Scroll;
+                    break;
+                case "numpad-":
+                case "numpadminus":
+                case "subtract":
+                    value = DirectXKeyCode.NumPadMinus;
+                    break;
+                case "numpadplus":
+                case "numpad+":
+                case "add":
+                    value = DirectXKeyCode.NumPadPlus;
+                    break;
+
+                case "numpad.":
+                case "numpadperiod":
+                case "decimal":
+                    value = DirectXKeyCode.NumPadPeriod;
+                    break;
+
+                case "kana":
+                case "kanamode":
+                    value = DirectXKeyCode.Kana;
+                    break;
+                case "convert":
+                case "imeconvert"://IME convert key
+                    value = DirectXKeyCode.Convert;
+                    break;
+                case "noconvert":
+                case "imenoconvert": //IME no convert keyDirectXKeyCode
+                    value = DirectXKeyCode.NoConvert;
+                    break;
+                case "numpadequals":
+                case "numpad=":
+                    value = DirectXKeyCode.NumPadEquals;
+                    break;
+                case "circumflex":
+                case "prevtrack":
+                case "previoustrack":
+                case "mediaprevioustrack":
+                    value = DirectXKeyCode.Circumflex;
+                    break;
+                case "at":
+                case "@":
+                    value = DirectXKeyCode.At;
+                    break;
+                case "underline":
+                case "_":
+                    value = DirectXKeyCode.Underline;
+                    break;
+                case "kanji":
+                case "kanjimode":
+                    value = DirectXKeyCode.Kanji;
+                    break;
+
+                case "nexttrack":
+                case "medianexttrack":
+                    value = DirectXKeyCode.NextTrack;
+                    break;
+                case "rightcontrol":
+                case "rcontrol":
+                case "rightctrl":
+                case "rctrl":
+                case "rcontrolkey":
+                    value = DirectXKeyCode.RightControl;
+                    break;
+                case "mute":
+                case "volumemute":
+                    value = DirectXKeyCode.Mute;
+                    break;
+                case "numpadcomma":
+                case "numpad,":
+                    value = DirectXKeyCode.NumPadComma;
+                    break;
+                case "rightmenu":
+                case "rmenu":
+                case "rightalt":
+                case "ralt":
+                    value = DirectXKeyCode.RightAlt;
+                    break;
+
+                case "uparrow":
+                case "up":
+                    value = DirectXKeyCode.UpArrow;
+                    break;
+                case "prior":
+                case "pageup":
+                    value = DirectXKeyCode.PageUp;
+                    break;
+                case "left":
+                case "leftarrow":
+                    value = DirectXKeyCode.LeftArrow;
+                    break;
+                case "right":
+                case "rightarrow":
+                    value = DirectXKeyCode.RightArrow;
+                    break;
+                case "down":
+                case "downarrow":
+                    value = new String[] { "down", "downarrow" };
+                    break;
+                case "next":
+                case "pagedown":
+                    value = new String[] { "next", "pagedown" };
+                    break;
+                case "leftwindows":
+                case "lwindows":
+                    value = new String[] { "leftwindows", "lwindows" };
+                    break;
+                case "rightwindows":
+                case "rwindows":
+                    value = new String[] { "rightwindows", "rwindows" };
+                    break;
+                case "apps":
+                case "application":
+                case "app":
+                    value = DirectXKeyCode.Apps;
+                    break;
+                case "websearch":
+                case "browsersearch":
+                    value = new String[] { "websearch", "browsersearch" };
+                    break;
+                case "webfavorites":
+                case "webfav":
+                case "browserfavorites":
+                case "browserfav":
+                    value = new String[] { "webfavorites", "webfav", "browserfavorites", "browserfav" };
+                    break;
+                case "webrefresh":
+                case "browserrefresh":
+                    value = new String[] { "webrefresh", "browserrefresh" };
+                    break;
+                case "webstop":
+                case "browserstop":
+                    value = new String[] { "webstop", "browserstop"};
+                    break;
+                case "webforward":
+                case "browserforward":
+                    value = new String[] { "webforward", "browserforward" };
+                    break;
+                case "webback":
+                case "browserback":
+                    value = new String[] { "webback", "browserback" };
+                    break;
+                default:
+                    break;
+            }
+            return value;
+        }
     }
 
     public enum DirectXKeyCode
