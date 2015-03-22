@@ -6,10 +6,9 @@ using System.Diagnostics;
 
 namespace FTGMaster.Helpers
 {
-    public delegate void MMTimerPressKeyDelegate(int vkCode);
     public class MMTimer : IDisposable
     {
-        #region DLLImport
+        #region DllImport
         //Lib API declarations
         [DllImport("Winmm.dll", CharSet = CharSet.Auto)]
         static extern uint timeSetEvent(uint uDelay, uint uResolution, TimerCallback lpTimeProc, UIntPtr dwUser, uint fuEvent);
@@ -25,10 +24,8 @@ namespace FTGMaster.Helpers
 
         [DllImport("Winmm.dll", CharSet = CharSet.Auto)]
         static extern uint timeEndPeriod(uint uPeriod);
-        #endregion
 
-        public MMTimerPressKeyDelegate mmTimerPressKeyDelegate;
-        public int vkCode;
+        #endregion
 
         //Timer type definitions
         [Flags]
@@ -78,15 +75,24 @@ namespace FTGMaster.Helpers
         /// <summary>
         /// The callback used by the the API
         /// </summary>
-        TimerCallback thisCallback;
+        TimerCallback thisCB;
+
         /// <summary>
         /// The timer elapsed event 
         /// </summary>
+        public event EventHandler Timer;
+        protected virtual void OnTimer(EventArgs e)
+        {
+            if (Timer != null)
+            {
+                Timer(this, e); 
+            }
+        }
 
         public MMTimer()
         {
             //Initialize the API callback
-            thisCallback = CallbackFuction;
+            thisCB = CBFunc;
         }
 
         /// <summary>
@@ -116,24 +122,21 @@ namespace FTGMaster.Helpers
             Stop();
 
             //Set the timer type flags
-            fuEvent oneShotEvent = fuEvent.TIME_CALLBACK_FUNCTION | (repeat ? fuEvent.TIME_PERIODIC : fuEvent.TIME_ONESHOT);
+            fuEvent f = fuEvent.TIME_CALLBACK_FUNCTION | (repeat ? fuEvent.TIME_PERIODIC : fuEvent.TIME_ONESHOT);
 
             lock (this)
             {
-                id = timeSetEvent(ms, 0, thisCallback, UIntPtr.Zero, (uint)oneShotEvent);
+                id = timeSetEvent(ms, 0, thisCB, UIntPtr.Zero, (uint)f);
                 if (id == 0)
-                {
-                    Debug.WriteLine("timeSetEvent error");
-                    //throw new Exception("timeSetEvent error");
-                }
-                //Debug.WriteLine("MMTimer " + id.ToString() + " started");
+                    throw new Exception("timeSetEvent error");
+                Debug.WriteLine("MMTimer " + id.ToString() + " started");
             }
         }
 
-        void CallbackFuction(uint uTimerID, uint uMsg, UIntPtr dwUser, UIntPtr dw1, UIntPtr dw2)
+        void CBFunc(uint uTimerID, uint uMsg, UIntPtr dwUser, UIntPtr dw1, UIntPtr dw2)
         {
             //Callback from the MMTimer API that fires the Timer event. Note we are in a different thread here
-            mmTimerPressKeyDelegate(vkCode);
+            OnTimer(new EventArgs());
         }
     }
 }
