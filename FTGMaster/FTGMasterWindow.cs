@@ -86,14 +86,7 @@ namespace FTGMaster
             DirectXKeyCode code = DirectXKeyParser.DirectXKeyScanCodeFromString(keyString);
             if (code != DirectXKeyCode.None)
             {
-                if (type == SingleMacroActionType.Press)
-                {
-                    _keyPressedTimeDictionary[keyString] = currentTime;
-                }
-                else if (type == SingleMacroActionType.Lift)
-                {
-                    _keyLiftedTimeDictionary[keyString] = currentTime;
-                }
+                this.StoreKeyEventTime(keyString, type, currentTime);
             }
 
             //检查是否有合适执行的macro
@@ -125,6 +118,20 @@ namespace FTGMaster
             }
         }
 
+        //保存按键按下记录
+        private void StoreKeyEventTime(String keyString, SingleMacroActionType type, double currentTime)
+        {
+            if (type == SingleMacroActionType.Press)
+            {
+                _keyPressedTimeDictionary[keyString] = currentTime;
+            }
+            else if (type == SingleMacroActionType.Lift)
+            {
+                _keyLiftedTimeDictionary[keyString] = currentTime;
+            }
+        }
+
+        //生成执行队列，执行macro
         private void ExecuteSingleMacro(SingleMacro macro, int delayMilliseconds)
         {
             string consoleMessage = string.Format("Macro begin execute macro named: {0}.", macro.NameString());
