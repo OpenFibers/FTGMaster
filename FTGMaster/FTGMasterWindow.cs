@@ -13,8 +13,8 @@ using FTGMaster.MacroProfiles;
 using FTGMaster.Helpers;
 
 //TODO：补齐脚本注释
-//TODO: 队列改为Disposable
-//TODO：执行队列
+//TODO: 增加manager
+//TODO:脚本录制
 
 namespace FTGMaster
 {
