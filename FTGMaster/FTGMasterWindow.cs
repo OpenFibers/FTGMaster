@@ -163,6 +163,7 @@ namespace FTGMaster
             bool contains = _macroExecutionQueues.Contains(queue);
             if (contains)
             {
+                queue.Dispose();
                 _macroExecutionQueues.Remove(queue);
             }
         }
