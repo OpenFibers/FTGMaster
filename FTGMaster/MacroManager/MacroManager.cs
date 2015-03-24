@@ -9,10 +9,20 @@ using FTGMaster.Helpers;
 using System.Diagnostics;
 
 /* 使用举例
- * _macroManager = new MacroManager(); //初始化
- * bool loadProfileSuccessed = _macroManager.LoadProfileWithRelativePath("demo_script.txt"); //载入profile
- * bool installHookSuccessed = _macroManager.InstallHook(); //安装钩子
- * _macroManager.UnInstallHook();//卸载钩子
+ * private MacroManager _macroManager = null;
+ * private void InitMacroManager()
+ * {
+ *     _macroManager = new MacroManager();//初始化
+ *     _macroManager.LoadProfileWithRelativePath("demo_script.txt");//载入profile
+ *     _macroManager.InstallHook(MacroManagerKeyEventUpdatedCallback);//安装钩子
+ *     _macroManager.UnInstallHook();//卸载钩子
+ *     _macroManager.IsHooked();//检查是否安装了钩子
+ * }
+ * 
+ * private void MacroManagerKeyEventUpdatedCallback(MacroManager manager, String keyEventString)//回调函数
+ * {
+ *     Debug.WriteLine(keyEventString);
+ * }
  */
 
 namespace FTGMaster.MacroManagerNamespace
@@ -81,18 +91,17 @@ namespace FTGMaster.MacroManagerNamespace
             _keyboardHook.UninstallHook();
         }
 
+        public bool IsHooked()
+        {
+            return _keyboardHook.IsHooked;
+        }
+
         public bool LoadProfileWithRelativePath(String relativePath)
         {
-            this.UnInstallHook();
             _currentProfile = null;
-
-            //读取当前的profile文件
             _currentProfile = MacroProfile.ProfileFromFileRelativePath("demo_script.txt");
-            if (_currentProfile == null)
-            {
-                return false;
-            }
-            return true;
+            bool successed = _currentProfile != null;
+            return successed;
         }
 
         private void KeyDownEventCallback(object sender, KeyboardHookEventArgs kea)//按键回调
