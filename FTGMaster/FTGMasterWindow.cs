@@ -23,6 +23,8 @@ namespace FTGMaster
         {
             InitializeComponent();
             _macroManager = new MacroManager();
+            _macroManager.LoadProfileWithRelativePath("demo_script.txt");
+            _macroManager.InstallHook();
         }
 
         private void FTGMasterWindowForm_Load(object sender, EventArgs e)//Form load
