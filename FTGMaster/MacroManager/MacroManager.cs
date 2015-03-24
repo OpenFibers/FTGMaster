@@ -39,6 +39,8 @@ namespace FTGMaster.MacroManagerNamespace
         private List<SingleMacroExecutionQueue> _macroExecutionQueues = null;
         private MacroManagerKeyEventUpdatedCallback _eventUpdateCallback;
 
+        private double _lastKeyEventTime = 0;
+
         public MacroManager()
         {
             //安装钩子，回调在KeyEventCallback
@@ -142,8 +144,13 @@ namespace FTGMaster.MacroManagerNamespace
             //键盘事件回调
             if (_eventUpdateCallback != null)
             {
-                _eventUpdateCallback(this, keyString);
+                double timeElapsed = currentTime - _lastKeyEventTime;
+                String timeElapsedString = "wait " + ((int)Math.Round(timeElapsed)).ToString() + ";\n";
+                String eventTypeString = (type == SingleMacroActionType.Press ? "press " : "lift ") + keyString + ";\n";
+                _eventUpdateCallback(this, timeElapsedString + eventTypeString);
             }
+
+            _lastKeyEventTime = currentTime;
 
             //检查是否有合适执行的macro
             foreach (SingleMacro macro in _currentProfile.AllMacros())

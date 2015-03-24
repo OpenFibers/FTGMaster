@@ -32,7 +32,7 @@ namespace FTGMaster
 
         private void MacroManagerKeyEventUpdatedCallback(MacroManager manager, String keyEventString)
         {
-            Debug.WriteLine(keyEventString);
+            Debug.Write(keyEventString);
         }
     }
 }
