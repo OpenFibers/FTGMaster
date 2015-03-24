@@ -19,12 +19,15 @@ namespace FTGMaster.MacroManagerNamespace
 {
     class MacroManager
     {
+        public delegate void MacroManagerKeyEventUpdatedCallback(MacroManager manager, String keyEventString);
+
         private IKeyboardHookExt _keyboardHook = null;
         private HighPrecisionTimeHelper _timeHelper = null;
         private MacroProfile _currentProfile = null;
         private Dictionary<String, double> _keyPressedTimeDictionary = null;
         private Dictionary<String, double> _keyLiftedTimeDictionary = null;
         private List<SingleMacroExecutionQueue> _macroExecutionQueues = null;
+        private MacroManagerKeyEventUpdatedCallback _eventUpdateCallback;
 
         public MacroManager()
         {
@@ -62,12 +65,13 @@ namespace FTGMaster.MacroManagerNamespace
             }
         }
 
-        public bool InstallHook()
+        public bool InstallHook(MacroManagerKeyEventUpdatedCallback callback)
         {
             if (_currentProfile == null)
             {
                 return false;
             }
+            _eventUpdateCallback = callback;
             _keyboardHook.InstallHook();
             return true;
         }
@@ -124,6 +128,12 @@ namespace FTGMaster.MacroManagerNamespace
                 {
                     this.StoreKeyEventTime(keyString, type, currentTime);
                 }
+            }
+
+            //键盘事件回调
+            if (_eventUpdateCallback != null)
+            {
+                _eventUpdateCallback(this, keyString);
             }
 
             //检查是否有合适执行的macro

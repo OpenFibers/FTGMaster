@@ -7,12 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 using FTGMaster.MacroManagerNamespace;
 
 
 //TODO：补齐脚本注释
-//TODO: 增加manager
-//TODO:脚本录制
 
 namespace FTGMaster
 {
@@ -24,11 +23,16 @@ namespace FTGMaster
             InitializeComponent();
             _macroManager = new MacroManager();
             _macroManager.LoadProfileWithRelativePath("demo_script.txt");
-            _macroManager.InstallHook();
+            _macroManager.InstallHook(MacroManagerKeyEventUpdatedCallback);
         }
 
         private void FTGMasterWindowForm_Load(object sender, EventArgs e)//Form load
         {
+        }
+
+        private void MacroManagerKeyEventUpdatedCallback(MacroManager manager, String keyEventString)
+        {
+            Debug.WriteLine(keyEventString);
         }
     }
 }
