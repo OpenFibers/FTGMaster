@@ -105,7 +105,7 @@ namespace FTGMaster.Helpers
                 if (id != 0)
                 {
                     timeKillEvent(id);
-                    Debug.WriteLine("MMTimer " + id.ToString() + " stopped");
+                    //Debug.WriteLine("MMTimer " + id.ToString() + " stopped");
                     id = 0;
                 }
             }
@@ -128,8 +128,10 @@ namespace FTGMaster.Helpers
             {
                 id = timeSetEvent(ms, 0, thisCB, UIntPtr.Zero, (uint)f);
                 if (id == 0)
+                {
                     throw new Exception("timeSetEvent error");
-                Debug.WriteLine("MMTimer " + id.ToString() + " started");
+                }
+                //Debug.WriteLine("MMTimer " + id.ToString() + " started");
             }
         }
 
