@@ -40,6 +40,7 @@ namespace FTGMaster.MacroManagerNamespace
         private MacroManagerKeyEventUpdatedCallback _eventUpdateCallback;
 
         private double _lastKeyEventTime = 0;
+        private String _lastEventTypeString = "";
 
         public MacroManager()
         {
@@ -144,13 +145,18 @@ namespace FTGMaster.MacroManagerNamespace
             //键盘事件回调
             if (_eventUpdateCallback != null)
             {
-                double timeElapsed = currentTime - _lastKeyEventTime;
-                String timeElapsedString = "wait " + ((int)Math.Round(timeElapsed)).ToString() + ";\n";
                 String eventTypeString = (type == SingleMacroActionType.Press ? "press " : "lift ") + keyString + ";\n";
-                _eventUpdateCallback(this, timeElapsedString + eventTypeString);
-            }
+                if (eventTypeString != _lastEventTypeString)//事件变更才需要发送通知,为了挡掉重复按下事件
+                {
+                    double timeElapsed = currentTime - _lastKeyEventTime;
+                    String timeElapsedString = "wait " + ((int)Math.Round(timeElapsed)).ToString() + ";\n";
+                    _eventUpdateCallback(this, timeElapsedString + eventTypeString);
 
-            _lastKeyEventTime = currentTime;
+                    //更新last记录
+                    _lastEventTypeString = eventTypeString;
+                    _lastKeyEventTime = currentTime;
+                }
+            }
 
             //检查是否有合适执行的macro
             foreach (SingleMacro macro in _currentProfile.AllMacros())
